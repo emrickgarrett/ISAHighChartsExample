@@ -410,4 +410,116 @@
             });
         });
 
+        $("#gate_count").click(function(){
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getGateCount();
+
+            var json_length = json.length; //Holy crap this is gonna be huge
+            var categories = [];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            while(json_length--){
+                var shouldAdd = true;
+                var index = -1;
+
+                //Determine if it is new category or not (Location)
+                for(var i = 0; i < categories.length; i++){
+                    if(categories[i].Location == json[json_length].Location){
+                        shouldAdd = false;
+                        index = i;
+                        i = categories.length;
+
+                    }
+                }
+                //If it's a new Location, add it to the array
+                if(shouldAdd) {
+                    categories[categories.length] = {"Location" : json[json_length].Location, "Data" : []};
+                    index = categories.length -1;
+                }else
+                    console.log(json[json_length].Location + " Was added with " + json[json_length].Count + " " + json[json_length].Date);
+
+                categories[index].Data.push([parseDate(json[json_length].Date), json[json_length].Count]);
+
+                console.log(categories[index].Data[0][0].getTime());
+
+            }
+
+
+            /*
+            var cat_length = categories.length;
+            while(cat_length--){
+                alert(categories[cat_length].Location + " " + categories[cat_length].Count_Data);
+            }
+            */
+
+            //Do something with this data...
+
+            $('#graph_space').highcharts({
+                title: {
+                    text: 'GateCount Data for Miami Locations',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'GateCountDataDump',
+                    x: -20
+                },
+                xAxis: {
+                    allowDecimals: false,
+                    type: "datetime",
+                    labels: {
+                        formatter: function () {
+                            return this.value; // clean, unformatted number for year
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Count'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value;
+                        }
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: categories[0].Location,
+                    data: categories[0].Data
+                }, {
+                    name: categories[1].Location,
+                    data: categories[1].Data
+                }, {
+                    name: categories[2].Location,
+                    data: categories[2].Data
+                }, {
+                    name: categories[3].Location,
+                    data: categories[3].Data
+                }]
+            });
+        });
+
     });
+
+
+    /*
+    // The dates need to be formatted for high charts. This assumes it comes in as yyyy-mm-dd hh-mm-ss
+     */
+    function parseDate(date){
+        return new Date(Date.parse(date));
+    }
