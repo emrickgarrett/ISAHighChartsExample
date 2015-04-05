@@ -411,14 +411,11 @@
         });
 
         $("#gate_count").click(function(){
-            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            //ID, Location, Date (yyyy-mm-dd hh:mm:ss), Count
             var json = getGateCount();
 
             var json_length = json.length; //Holy crap this is gonna be huge
             var categories = [];
-
-            //How long the data set is (50,000 for this set)
-            //alert(json_length);
 
             while(json_length--){
                 var shouldAdd = true;
@@ -442,7 +439,7 @@
 
                 categories[index].Data.push([parseDate(json[json_length].Date), json[json_length].Count]);
 
-                console.log(categories[index].Data[0][0].getTime());
+                //console.log(categories[index].Data[0][0].getTime());
 
             }
 
@@ -512,6 +509,85 @@
                     data: categories[3].Data
                 }]
             });
+        });
+
+        $("#database_by_usage").click(function() {
+
+            //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
+
+            var db_usage_2012_json = getDatabase2012();
+            var db_usage_2013_json = getDatabase2013();
+            var db_usage_2014_json = getDatabase2014();
+
+            var db2012_length = db_usage_2012_json.length;
+            var db2013_length = db_usage_2013_json.length;
+            var db2014_length = db_usage_2014_json.length;
+
+            //This determines usage across all databases. Sort by FundCode and Usage
+            var fundCodes_array = [];
+
+            //Repeat variables to save memory
+            var shouldAdd = true;
+            var index = -1;
+            var i = 0;
+
+            //Do parsing for each individual db since 2012
+            while(db2012_length-- > 0){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2012_json[db2012_length] == fundCodes_array[i]){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[db2012_length][3], "Data" : []};
+                    index = fundCodes_array.length-1;
+                    console.log(fundCodes_array[index].Fund_Code);
+                }
+            }
+
+            while(db2013_length-- > 0){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2013_json[db2013_length] == fundCodes_array[i]){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[db2013_length][3], "Data" : []};
+                    index = fundCodes_array.length-1;
+                    console.log(fundCodes_array[index].Fund_Code);
+                }
+            }
+
+            while(db2014_length-- > 0){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2014_json[db2014_length] == fundCodes_array[i]){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[db2014_length][3], "Data" : []};
+                    index = fundCodes_array.length-1;
+                    console.log(fundCodes_array[index].Fund_Code);
+                }
+            }
+
+
+
         });
 
     });

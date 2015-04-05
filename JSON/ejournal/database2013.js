@@ -1,4 +1,4 @@
-var database2013 = [
+function getDatabase2013() { return [
   ["Title","Publisher","Print ISSN","Online ISSN","Fund Code","Total Cost","Uses","Cost Per Use"  ],
   ["Defense and Security Analysis","TAYLOR & FRANCIS GROUP","1475-1798","1475-1801","61AES","$759.00 ","7","$108.43 "  ],
   ["AMERICAN JOURNAL OF BOTANY - ONLINE","BOTANICAL SOC OF AMERICA INC","0002-9122","1537-2197","61BOT","$715.00 ","340","$2.10 "  ],
@@ -765,4 +765,4 @@ var database2013 = [
   ["REVISTA DE FILOLOGIA ESPANOLA - PRINT + ONLINE","CONSEJO SUPERIOR INVESTIGACION","0210-9174","","63SPN","$106.33 ","0","$0.00 "  ],
   ["Research in Drama Education","TAYLOR & FRANCIS GROUP","1356-9783","1470-112X","63THE","$683.00 ","5","$136.60 "  ],
   ["Women & Performance","TAYLOR & FRANCIS GROUP","0740-770X","1748-5819","63THE","$203.00 ","7","$29.00 "  ]
-];
+]; }
