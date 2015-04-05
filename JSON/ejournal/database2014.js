@@ -1,4 +1,4 @@
-var database2012 = [
+[
   ["Title","Publisher","ISSN","Fund Code","Total Cost","Uses","Cost Per Use"  ],
   ["Defense and Security Analysis","TAYLOR & FRANCIS GROUP","1475-1798","61AES","$814.00","2","$407.00"  ],
   ["American Journal of Botany","BOTANICAL SOC OF AMERICA INC","1537-2197","61BOT","$670.00","804","$0.83"  ],
@@ -694,4 +694,4 @@ var database2012 = [
   ["Journal of Iberian and Latin - American Studies","TAYLOR & FRANCIS GROUP","1470-1847","63SPN","$752.00","0","$0.00"  ],
   ["Women & Performance","TAYLOR & FRANCIS GROUP","0740-770X","63THE","$218.00","56","$3.89"  ],
   ["Research in Drama Education","TAYLOR & FRANCIS GROUP","1356-9783","63THE","$732.00","0","$0.00"  ]
-];
+]
