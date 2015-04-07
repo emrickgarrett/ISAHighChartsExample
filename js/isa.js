@@ -536,7 +536,7 @@
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2012_json[db2012_length] == fundCodes_array[i]){
+                    if(db_usage_2012_json[db2012_length][3] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -544,17 +544,19 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[db2012_length][3], "Data" : []};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[db2012_length][3], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
-                    console.log(fundCodes_array[index].Fund_Code);
+                    //console.log(fundCodes_array[index].Fund_Code);
                 }
+
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2012_json[db2012_length][4].substring(1,db_usage_2012_json[db2012_length][4].length));
             }
 
             while(db2013_length-- > 0){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2013_json[db2013_length] == fundCodes_array[i]){
+                    if(db_usage_2013_json[db2013_length][3] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -562,17 +564,19 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[db2013_length][3], "Data" : []};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[db2013_length][3], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
-                    console.log(fundCodes_array[index].Fund_Code);
+                    //console.log(fundCodes_array[index].Fund_Code);
                 }
+
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2013_json[db2013_length][4].substring(1,db_usage_2013_json[db2013_length][4].length));
             }
 
             while(db2014_length-- > 0){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2014_json[db2014_length] == fundCodes_array[i]){
+                    if(db_usage_2014_json[db2014_length][3] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -580,12 +584,19 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[db2014_length][3], "Data" : []};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[db2014_length][3], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
-                    console.log(fundCodes_array[index].Fund_Code);
+                    //console.log(fundCodes_array[index].Fund_Code);
                 }
+
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2014_json[db2014_length][4].substring(1,db_usage_2014_json[db2014_length][4].length));
             }
 
+            var fund_length = fundCodes_array.length;
+
+            while(fund_length--){
+                console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].Cost);
+            }
 
 
         });
