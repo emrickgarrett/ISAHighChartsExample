@@ -519,9 +519,157 @@
             var db_usage_2013_json = getDatabase2013();
             var db_usage_2014_json = getDatabase2014();
 
-            var db2012_length = db_usage_2012_json.length;
-            var db2013_length = db_usage_2013_json.length;
-            var db2014_length = db_usage_2014_json.length;
+            //This determines usage across all databases. Sort by FundCode and Usage
+            var fundCodes_array = [];
+
+            //Repeat variables to save memory
+            var shouldAdd = true;
+            var index = -1;
+            var i = 0;
+            var j = 0;
+
+            for(i = 1; i < db_usage_2012_json.length; i++){
+                //console.log(db_usage_2012_json[i][3]);
+            }
+
+
+            //Do parsing for each individual db since 2012
+            for(j = 1; j < db_usage_2012_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2012_json[j][3] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[j][3], "Data" : [], "Cost" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2012_json[j][4].substring(1,db_usage_2012_json[j][4].length));
+            }
+
+            for(j = 1; j < db_usage_2013_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2013_json[j][4] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[j][4], "Data" : [], "Cost" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2013_json[j][4].substring(1,db_usage_2013_json[j][5].length));
+            }
+
+            for(j = 1; j < db_usage_2014_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "Cost" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2014_json[j][4].substring(1,db_usage_2014_json[j][4].length));
+            }
+
+            var fund_length = fundCodes_array.length;
+
+            var series = [];
+            var names  = [];
+            while(fund_length--){
+                console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].Cost);
+                names.push(fundCodes_array[fund_length].Fund_Code);
+                series.push({
+                    name: fundCodes_array[fund_length].Fund_Code,
+                    data: [fundCodes_array[fund_length].Cost]
+                });
+            }
+            $('#graph_space').highcharts({
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Total Cost by Fund Code'
+                    },
+                    subtitle: {
+                        text: 'Source: db_usage 2012,2013,2014'
+                    },
+                    xAxis: {
+                        categories: ['Fund Code Statistics'],
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 45000,
+                        title: {
+                            text: 'Cost',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' dollars'
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -40,
+                        y: 80,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                        shadow: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: series
+                });
+
+
+        });
+
+        $("#total_fundcode_cost").click(function() {
+
+            //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
+
+            var db_usage_2012_json = getDatabase2012();
+            var db_usage_2013_json = getDatabase2013();
+            var db_usage_2014_json = getDatabase2014();
 
             //This determines usage across all databases. Sort by FundCode and Usage
             var fundCodes_array = [];
@@ -530,13 +678,19 @@
             var shouldAdd = true;
             var index = -1;
             var i = 0;
+            var j = 0;
+
+            for(i = 1; i < db_usage_2012_json.length; i++){
+                //console.log(db_usage_2012_json[i][3]);
+            }
+
 
             //Do parsing for each individual db since 2012
-            while(db2012_length-- > 0){
+            for(j = 1; j < db_usage_2012_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2012_json[db2012_length][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2012_json[j][3] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -544,19 +698,19 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[db2012_length][3], "Data" : [], "Cost" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[j][3], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2012_json[db2012_length][4].substring(1,db_usage_2012_json[db2012_length][4].length));
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2012_json[j][4].substring(1,db_usage_2012_json[j][4].length));
             }
 
-            while(db2013_length-- > 0){
+            for(j = 1; j < db_usage_2013_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2013_json[db2013_length][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2013_json[j][4] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -564,19 +718,19 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[db2013_length][3], "Data" : [], "Cost" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[j][4], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2013_json[db2013_length][4].substring(1,db_usage_2013_json[db2013_length][4].length));
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2013_json[j][4].substring(1,db_usage_2013_json[j][5].length));
             }
 
-            while(db2014_length-- > 0){
+            for(j = 1; j < db_usage_2014_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2014_json[db2014_length][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -584,19 +738,79 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[db2014_length][3], "Data" : [], "Cost" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2014_json[db2014_length][4].substring(1,db_usage_2014_json[db2014_length][4].length));
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2014_json[j][4].substring(1,db_usage_2014_json[j][4].length));
             }
 
             var fund_length = fundCodes_array.length;
 
+            var series = [];
+            var names  = [];
             while(fund_length--){
                 console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].Cost);
+                names.push(fundCodes_array[fund_length].Fund_Code);
+                series.push({
+                    name: fundCodes_array[fund_length].Fund_Code,
+                    data: [fundCodes_array[fund_length].Cost]
+                });
             }
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Total Cost by Fund Code'
+                },
+                subtitle: {
+                    text: 'Source: db_usage 2012,2013,2014'
+                },
+                xAxis: {
+                    categories: ['Fund Code Statistics'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 45000,
+                    title: {
+                        text: 'Cost',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' dollars'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: series
+            });
 
 
         });
@@ -609,4 +823,8 @@
      */
     function parseDate(date){
         return new Date(Date.parse(date));
+    }
+
+    function printInstructions(){
+         console.log(getInstructionData()[1].FIELD8);
     }
