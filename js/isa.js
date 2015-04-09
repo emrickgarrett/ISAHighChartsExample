@@ -760,6 +760,504 @@
 
         });
 
+        $("#total_fundcode_use").click(function() {
+
+            //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
+
+            var db_usage_2012_json = getDatabase2012();
+            var db_usage_2013_json = getDatabase2013();
+            var db_usage_2014_json = getDatabase2014();
+
+            //This determines usage across all databases. Sort by FundCode and Usage
+            var fundCodes_array = [];
+
+            //Repeat variables to save memory
+            var shouldAdd = true;
+            var index = -1;
+            var i = 0;
+            var j = 0;
+
+            for(i = 1; i < db_usage_2012_json.length; i++){
+                //console.log(db_usage_2012_json[i][3]);
+            }
+
+
+            //Do parsing for each individual db since 2012
+            for(j = 1; j < db_usage_2012_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2012_json[j][3] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[j][3], "Data" : [], "Uses" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2012_json[j][5]);
+            }
+
+            for(j = 1; j < db_usage_2013_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2013_json[j][4] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[j][4], "Data" : [], "Uses" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2013_json[j][6]);
+            }
+
+            for(j = 1; j < db_usage_2014_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "Uses" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2014_json[j][5]);
+            }
+
+            var fund_length = fundCodes_array.length;
+
+            var series = [];
+            var names  = [];
+            while(fund_length--){
+                console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].Uses);
+                names.push(fundCodes_array[fund_length].Fund_Code);
+                series.push({
+                    name: fundCodes_array[fund_length].Fund_Code,
+                    data: [fundCodes_array[fund_length].Uses]
+                });
+            }
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Total Use by Fund Code'
+                },
+                subtitle: {
+                    text: 'Source: db_usage 2012,2013,2014'
+                },
+                xAxis: {
+                    categories: ['Fund Code Statistics'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 17500,
+                    title: {
+                        text: 'Use',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' uses'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: series
+            });
+
+
+        });
+
+        $("#total_fundcode_use_per_year").click(function() {
+
+            //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
+
+            var db_usage_2012_json = getDatabase2012();
+            var db_usage_2013_json = getDatabase2013();
+            var db_usage_2014_json = getDatabase2014();
+
+            //This determines usage across all databases. Sort by FundCode and Usage
+            var fundCodes_array = [{"Year" : 2012, "Uses" : 0},
+                {"Year" : 2013, "Uses" : 0},
+                {"Year" : 2014, "Uses" : 0}];
+
+            var j = 0;
+
+
+            //Do parsing for each individual db since 2012
+            for(j = 1; j < db_usage_2012_json.length; j++){
+
+                fundCodes_array[0].Uses = fundCodes_array[0].Uses + parseInt(db_usage_2012_json[j][5]);
+            }
+
+            for(j = 1; j < db_usage_2013_json.length; j++){
+                fundCodes_array[1].Uses = fundCodes_array[1].Uses + parseInt(db_usage_2013_json[j][6]);
+            }
+
+            for(j = 1; j < db_usage_2014_json.length; j++){
+                fundCodes_array[2].Uses = fundCodes_array[2].Uses + parseInt(db_usage_2014_json[j][5]);
+            }
+
+            var fund_length = fundCodes_array.length;
+
+            var series = [];
+            var names  = ["2012", "2013", "2014"];
+            while(fund_length--){
+                console.log(fundCodes_array[fund_length].Uses);
+                series.push({
+                    name: [fundCodes_array[fund_length].Year],
+                    data: [fundCodes_array[fund_length].Uses]
+                });
+            }
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Total Use by Year'
+                },
+                subtitle: {
+                    text: 'Source: db_usage 2012,2013,2014'
+                },
+                xAxis: {
+                    categories: ["By Year"],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Use',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' uses'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: series
+            });
+
+
+        });
+
+        $("#cost_per_use").click(function() {
+
+            //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
+
+            var db_usage_2012_json = getDatabase2012();
+            var db_usage_2013_json = getDatabase2013();
+            var db_usage_2014_json = getDatabase2014();
+
+            //This determines usage across all databases. Sort by FundCode and Usage
+            var fundCodes_array = [];
+
+            //Repeat variables to save memory
+            var shouldAdd = true;
+            var index = -1;
+            var i = 0;
+            var j = 0;
+
+            for(i = 1; i < db_usage_2012_json.length; i++){
+                //console.log(db_usage_2012_json[i][3]);
+            }
+
+
+            //Do parsing for each individual db since 2012
+            for(j = 1; j < db_usage_2012_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2012_json[j][3] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2012_json[j][3], "Data" : [], "CostPerUse" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2012_json[j][6].substring(1,db_usage_2012_json[j][6].length));
+            }
+
+            for(j = 1; j < db_usage_2013_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2013_json[j][4] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2013_json[j][4], "Data" : [], "CostPerUse" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2013_json[j][7].substring(1,db_usage_2013_json[j][7].length));
+            }
+
+            for(j = 1; j < db_usage_2014_json.length; j++){
+                shouldAdd = true;
+                index = -1;
+                for(i = 0; i < fundCodes_array.length; i++){
+                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                        shouldAdd = false;
+                        index = i;
+                        i = fundCodes_array.length;
+                    }
+                }
+
+                if(shouldAdd){
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "CostPerUse" : 0};
+                    index = fundCodes_array.length-1;
+                    //console.log(fundCodes_array[index].Fund_Code);
+                }
+
+                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2014_json[j][6].substring(1,db_usage_2014_json[j][6].length));
+            }
+
+            var fund_length = fundCodes_array.length;
+
+            var series = [];
+            var names  = [];
+            while(fund_length--){
+                console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].CostPerUse);
+                names.push(fundCodes_array[fund_length].Fund_Code);
+                series.push({
+                    name: fundCodes_array[fund_length].Fund_Code,
+                    data: [fundCodes_array[fund_length].CostPerUse]
+                });
+            }
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Cost Per Use by Fund Code'
+                },
+                subtitle: {
+                    text: 'Source: db_usage 2012,2013,2014'
+                },
+                xAxis: {
+                    categories: ['Fund Code Statistics'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 8000,
+                    title: {
+                        text: 'Cost per Use',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' $/use'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: series
+            });
+
+
+        });
+
+        $("#cost_per_use_by_year").click(function() {
+
+            //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
+
+            var db_usage_2012_json = getDatabase2012();
+            var db_usage_2013_json = getDatabase2013();
+            var db_usage_2014_json = getDatabase2014();
+
+            //This determines usage across all databases. Sort by FundCode and Usage
+            var fundCodes_array = [{"Year" : 2012, "CostPerUse" : 0},
+                {"Year" : 2013, "CostPerUse" : 0},
+                {"Year" : 2014, "CostPerUse" : 0}];
+
+            var j = 0;
+
+
+            //Do parsing for each individual db since 2012
+            for(j = 1; j < db_usage_2012_json.length; j++){
+
+                fundCodes_array[0].CostPerUse = fundCodes_array[0].CostPerUse + parseInt(db_usage_2012_json[j][6].substring(1,db_usage_2012_json[j][6].length));
+            }
+
+            for(j = 1; j < db_usage_2013_json.length; j++){
+                fundCodes_array[1].CostPerUse = fundCodes_array[1].CostPerUse + parseInt(db_usage_2013_json[j][7].substring(1,db_usage_2013_json[j][7].length));
+            }
+
+            for(j = 1; j < db_usage_2014_json.length; j++){
+                fundCodes_array[2].CostPerUse = fundCodes_array[2].CostPerUse + parseInt(db_usage_2014_json[j][6].substring(1,db_usage_2014_json[j][6].length));
+            }
+
+            var fund_length = fundCodes_array.length;
+
+            var series = [];
+            var names  = ["2012", "2013", "2014"];
+            while(fund_length--){
+                console.log(fundCodes_array[fund_length].CostPerUse);
+                series.push({
+                    name: [fundCodes_array[fund_length].Year],
+                    data: [fundCodes_array[fund_length].CostPerUse]
+                });
+            }
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Total Cost Per Use by Year'
+                },
+                subtitle: {
+                    text: 'Source: db_usage 2012,2013,2014'
+                },
+                xAxis: {
+                    categories: ["By Year"],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Cost/Use',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' $/use'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: series
+            });
+
+
+        });
+
     });
 
 
