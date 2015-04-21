@@ -30,22 +30,52 @@ body{
 
 #sidebar{
     float:left;
-    min-height:600px;
-    width:25%;
+    min-height:450px
+
 }
 
-#sidebar a{
-    display:block;
-    color:#fff;
-    font: 1.0em/38px 'Myriad Pro', Helvetica, sans-serif;
-    text-transform: uppercase;
+#sidebar-items{
+    float:left;
+    min-height:450px;
+    background: #E22;
+}
+
+#sidebar-items > a > div{
+    color:white;
     text-shadow: 1px 1px 1px black;
-    padding: 2px 5px;
-    background:#E22;
-    border-radius: 3px;
-    border: 1px solid white;
-    margin: 2px 5px;
-    text-decoration:none;
+    font-size:3em;
+    padding:10px 20px;
+}
+
+#sidebar-items > a > div:hover{
+    color:#E22;
+    background:white;
+}
+
+#sidebar_info{
+    float:left;
+    min-height:450px;
+    background:#B22;
+    text-align:left;
+    position:absolute;
+    z-index:1;
+}
+
+#ejournal-info > a,#circulation-info > a, #instruction-info > a {
+    color:white;
+    text-shadow: 1px 1px 1px black;
+    font-size:1em;
+    padding:2px 4px;
+    display:block;
+    margin: 5px 5px;
+    font-family: 'Myriad Pro', Helvetica, sans-serif;
+}
+
+#ejournal-info > h2, #circulation-info > h2, #instruction-info > h2{
+    color:white;
+    margin: 5px 5px;
+    text-shadow: 1px 1px 1px black;
+    font-family: 'Myriad Pro', Helvetica, sans-serif;
 }
 
 #graph_space{
@@ -55,4 +85,5 @@ body{
     text-align:center;
     min-width: 310px;
     margin: 0 auto;
+    z-index:0;
 }

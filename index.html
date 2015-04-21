@@ -12,13 +12,18 @@
     <!-- This is the HighCharts js location -->
     <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 
+
+    <script type="text/javascript" src="js/layout.js"></script>
+
+
     <script type="text/javascript" src="JSON/circulation/GateCountDataDump.js"></script>
+    <script type="text/javascript" src="JSON/circulation/DailyCircDataDump.js"></script>
     <script type="text/javascript" src="JSON/ejournal/database2013.js"></script>
     <script type="text/javascript" src="JSON/ejournal/database2014.js"></script>
     <script type="text/javascript" src="JSON/ejournal/databaseusage2012.js"></script>
+    <script type="text/javascript" src="JSON/ejournal/2012.js"></script>
+    <script type="text/javascript" src="JSON/ejournal/2014.js"></script>
     <script type="text/javascript" src="JSON/Instruction.js"></script>
-
-
 
     <!-- Custom CSS/JS files for demonstration -->
     <script type="text/javascript" src="js/isa.js"></script>
@@ -26,44 +31,79 @@
 
 </head>
 <body>
-    <div id="navbar">
-        <div id="ISA">
-            <h1>Library Analytics Dashboard</h1>
-        </div>
+<div id="navbar">
+    <div id="ISA">
+        <h1>Library Analytics Dashboard</h1>
     </div>
+</div>
 
-    <div id="content">
-        <div id="sidebar">
-            <a href="#" id="gate_count">
-                Gate Count
+<div id="content">
+    <div id="sidebar">
+        <div id="sidebar-items">
+            <a href="#">
+                <div id="circulation">
+                    <i class="fa fa-exchange"></i>
+                </div>
             </a>
-            <a href="#" id="database_by_usage">
-                Cost of Fundcodes
+            <a href="#">
+                <div id="ejournal">
+                    <i class="fa fa-book"></i>
+                </div>
             </a>
-            <a href="#" id="total_fundcode_cost">
-                Total Cost of Fundcodes by Year
+            <a href="#">
+                <div id="instruction">
+                    <i class="fa fa-italic"></i>
+                </div>
             </a>
-            <a href="#" id="total_fundcode_use">
-                Uses of Fundcodes
-            </a>
-            <a href="#" id="total_fundcode_use_per_year">
-                Total Use of Fundcodes by Year
-            </a>
-            <a href="#" id="cost_per_use">
-                Cost Per Use of Fundcodes
-            </a>
-            <a href="#" id="cost_per_use_by_year">
-                Cost Per Use by Year
-            </a>
-            <a href="#" id="highest_cost_per_use">
-                Highest Cost Per Use
-            </a>
+            <!--
+
+
+            -->
 
         </div>
-        <div id="graph_space">
-            Click on a Graph on the Left to view it here
+        <div id="sidebar_info">
+            <div id="circulation-info">
+                <h2>Circulation</h2>
+                <a href="#" id="gate_count">
+                    Gate Count
+                </a>
+                <a href="#" id="equipment_by_location">
+                    Equipment Usage By Location
+                </a>
+            </div>
+            <div id="ejournal-info">
+                <h2>Ejournal</h2>
+                <a href="#" id="database_by_usage">
+                    Cost of Fundcodes
+                </a>
+                <a href="#" id="total_fundcode_cost">
+                    Total Cost of Fundcodes by Year
+                </a>
+                <a href="#" id="total_fundcode_use">
+                    Uses of Fundcodes
+                </a>
+                <a href="#" id="total_fundcode_use_per_year">
+                    Total Use of Fundcodes by Year
+                </a>
+                <a href="#" id="cost_per_use">
+                    Cost Per Use of Fundcodes
+                </a>
+                <a href="#" id="cost_per_use_by_year">
+                    Cost Per Use by Year
+                </a>
+                <a href="#" id="highest_cost_per_use">
+                    Highest Cost Per Use
+                </a>
+            </div>
+            <div id="instruction-info">
+                <h2>Instruction</h2>
+            </div>
         </div>
     </div>
+    <div id="graph_space">
+        Click on a Graph on the Left to view it here
+    </div>
+</div>
 
 
 

@@ -1,4 +1,4 @@
-function getDatabase2014() { return [
+function getDatabase2014old() { return [
   ["Title","Publisher","ISSN","Fund Code","Total Cost","Uses","Cost Per Use"  ],
   ["Defense and Security Analysis","TAYLOR & FRANCIS GROUP","1475-1798","61AES","$814.00","2","$407.00"  ],
   ["American Journal of Botany","BOTANICAL SOC OF AMERICA INC","1537-2197","61BOT","$670.00","804","$0.83"  ],

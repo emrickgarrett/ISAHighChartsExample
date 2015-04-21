@@ -528,13 +528,13 @@
             var i = 0;
             var j = 0;
 
-            for(i = 1; i < db_usage_2012_json.length; i++){
+            for(i = 0; i < db_usage_2012_json.length; i++){
                 //console.log(db_usage_2012_json[i][3]);
             }
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
@@ -578,7 +578,7 @@
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2014_json[j][4] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -586,12 +586,12 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "Cost" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][4], "Data" : [], "Cost" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2014_json[j][4].substring(1,db_usage_2014_json[j][4].length));
+                fundCodes_array[index].Cost = fundCodes_array[index].Cost + parseInt(db_usage_2014_json[j][5].substring(1,db_usage_2014_json[j][5].length));
             }
 
             var fund_length = fundCodes_array.length;
@@ -680,7 +680,7 @@
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
 
                 fundCodes_array[0].Cost = fundCodes_array[0].Cost + parseInt(db_usage_2012_json[j][4].substring(1,db_usage_2012_json[j][4].length));
             }
@@ -690,7 +690,7 @@
             }
 
             for(j = 1; j < db_usage_2014_json.length; j++){
-                fundCodes_array[2].Cost = fundCodes_array[2].Cost + parseInt(db_usage_2014_json[j][4].substring(1,db_usage_2014_json[j][4].length));
+                fundCodes_array[2].Cost = fundCodes_array[2].Cost + parseInt(db_usage_2014_json[j][5].substring(1,db_usage_2014_json[j][5].length));
             }
 
             var fund_length = fundCodes_array.length;
@@ -783,7 +783,7 @@
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
@@ -827,7 +827,7 @@
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2014_json[j][4] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -835,12 +835,12 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "Uses" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][4], "Data" : [], "Uses" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2014_json[j][5]);
+                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2014_json[j][6]);
             }
 
             var fund_length = fundCodes_array.length;
@@ -929,7 +929,7 @@
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
 
                 fundCodes_array[0].Uses = fundCodes_array[0].Uses + parseInt(db_usage_2012_json[j][5]);
             }
@@ -939,7 +939,7 @@
             }
 
             for(j = 1; j < db_usage_2014_json.length; j++){
-                fundCodes_array[2].Uses = fundCodes_array[2].Uses + parseInt(db_usage_2014_json[j][5]);
+                fundCodes_array[2].Uses = fundCodes_array[2].Uses + parseInt(db_usage_2014_json[j][6]);
             }
 
             var fund_length = fundCodes_array.length;
@@ -1032,7 +1032,7 @@
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
@@ -1076,7 +1076,7 @@
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2014_json[j][4] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -1084,12 +1084,12 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "CostPerUse" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][4], "Data" : [], "CostPerUse" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2014_json[j][6].substring(1,db_usage_2014_json[j][6].length));
+                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2014_json[j][7].substring(1,db_usage_2014_json[j][7].length));
             }
 
             var fund_length = fundCodes_array.length;
@@ -1178,7 +1178,7 @@
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
 
                 fundCodes_array[0].CostPerUse = fundCodes_array[0].CostPerUse + parseInt(db_usage_2012_json[j][6].substring(1,db_usage_2012_json[j][6].length));
             }
@@ -1188,7 +1188,7 @@
             }
 
             for(j = 1; j < db_usage_2014_json.length; j++){
-                fundCodes_array[2].CostPerUse = fundCodes_array[2].CostPerUse + parseInt(db_usage_2014_json[j][6].substring(1,db_usage_2014_json[j][6].length));
+                fundCodes_array[2].CostPerUse = fundCodes_array[2].CostPerUse + parseInt(db_usage_2014_json[j][7].substring(1,db_usage_2014_json[j][7].length));
             }
 
             var fund_length = fundCodes_array.length;
@@ -1244,10 +1244,12 @@
                     verticalAlign: 'top',
                     x: -40,
                     y: 80,
+                    maxHeight: 0,
                     floating: true,
                     borderWidth: 1,
                     backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                    shadow: true
+                    shadow: true,
+                    display: false
                 },
                 credits: {
                     enabled: false
@@ -1255,6 +1257,7 @@
                 series: series
             });
 
+            //Something to modify the legend
 
         });
 
@@ -1275,13 +1278,13 @@
             var i = 0;
             var j = 0;
 
-            for(i = 1; i < db_usage_2012_json.length; i++){
+            for(i = 0; i < db_usage_2012_json.length; i++){
                 //console.log(db_usage_2012_json[i][3]);
             }
 
 
             //Do parsing for each individual db since 2012
-            for(j = 1; j < db_usage_2012_json.length; j++){
+            for(j = 0; j < db_usage_2012_json.length; j++){
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
@@ -1327,7 +1330,7 @@
                 shouldAdd = true;
                 index = -1;
                 for(i = 0; i < fundCodes_array.length; i++){
-                    if(db_usage_2014_json[j][3] == fundCodes_array[i].Fund_Code){
+                    if(db_usage_2014_json[j][4] == fundCodes_array[i].Fund_Code){
                         shouldAdd = false;
                         index = i;
                         i = fundCodes_array.length;
@@ -1335,13 +1338,13 @@
                 }
 
                 if(shouldAdd){
-                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][3], "Data" : [], "CostPerUse" : 0, "Uses" : 0};
+                    fundCodes_array[fundCodes_array.length] = {"Fund_Code" : db_usage_2014_json[j][4], "Data" : [], "CostPerUse" : 0, "Uses" : 0};
                     index = fundCodes_array.length-1;
                     //console.log(fundCodes_array[index].Fund_Code);
                 }
 
-                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2014_json[j][6].substring(1,db_usage_2014_json[j][6].length));
-                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2014_json[j][5]);
+                fundCodes_array[index].CostPerUse = fundCodes_array[index].CostPerUse + parseInt(db_usage_2014_json[j][7].substring(1,db_usage_2014_json[j][7].length));
+                fundCodes_array[index].Uses = fundCodes_array[index].Uses + parseInt(db_usage_2014_json[j][6]);
             }
 
             var fund_length = fundCodes_array.length;
@@ -1439,6 +1442,263 @@
             });
 
 */
+        });
+
+        $("#equipment_by_location").click(function(){
+            var data = getCircDataDump();
+
+            var length = data.length;
+
+            //The Tags are what I found in the spreasheet that was sent to me. There are some that are not being accounted
+            //for, but I don't know which library they are a part of so I can't do anything with that data.
+            var graph_data = [{
+                Name: "Art/Arch",
+                Count: 0,
+                Tags: [
+                    "aacmp",
+                    "aaeq",
+                    "aaff",
+                    "aafo",
+                    "aags",
+                    "aali",
+                    "aap",
+                    "aar",
+                    "aars",
+                    "aasup"
+                ]
+            },{
+                Name: "GIL",
+                Count: 0,
+                Tags: [
+                    "cat",
+                    "ccat",
+                    "docc",
+                    "doceu",
+                    "docfm",
+                    "docli",
+                    "doco",
+                    "docr",
+                    "docrs",
+                    "docsr",
+                    "docun"
+                ]
+            },{
+                Name: "Hamilton",
+                Count: 0,
+                Tags: [
+                    "haeq",
+                    "hali",
+                    "halju",
+                    "hamc",
+                    "hamp",
+                    "hanb",
+                    "har",
+                    "hars"
+                ]
+            }, {
+                Name: "IMC",
+                Count: 0,
+                Tags: [
+                    "imbk",
+                    "imbkt",
+                    "imci",
+                    "imcur",
+                    "imdvd",
+                    "imeq",
+                    "imjb",
+                    "imje",
+                    "imju",
+                    "imlng",
+                    "imm",
+                    "imp",
+                    "imr",
+                    "imrdr",
+                    "imrs",
+                    "imvc",
+                    "imvr"
+                ]
+            }, {
+                Name: "King",
+                Count: 0,
+                Tags: [
+                    "kngco",
+                    "kngeq",
+                    "kngfo",
+                    "kngin",
+                    "kngle",
+                    "kngli",
+                    "kngp",
+                    "kngr",
+                    "kngrs",
+                    "kngsl",
+                    "kngsu"
+                ]
+            }, {
+                Name: "Middletown",
+                Count: 0,
+                Tags: [
+                    "mdim",
+                    "mdju",
+                    "mdli",
+                    "mdr"
+                ]
+            },{
+                Name: "Music",
+                Count: 0,
+                Tags: [
+                    "muc",
+                    "mufo",
+                    "muli",
+                    "mup",
+                    "mur",
+                    "murc",
+                    "murcd"
+                ]
+            },{
+                Name: "Sword",
+                Count: 0,
+                Tags: [
+                    "rg2pk",
+                    "rg2ps",
+                    "rg2ta",
+                    "rg2td",
+                    "rg2tg",
+                    "rg2tk",
+                    "rg2tm",
+                    "rg2ts",
+                    "rgspa",
+                    "rgspk",
+                    "rgsps",
+                    "rgstk",
+                    "rgsts"
+                ]
+            },{
+                Name: "BEST",
+                Count: 0,
+                Tags: [
+                    "sceq",
+                    "scfo",
+                    "scfor",
+                    "schaa",
+                    "schsm",
+                    "scli",
+                    "scmpc",
+                    "scmpv",
+                    "scov",
+                    "scp",
+                    "scr",
+                    "scrm",
+                    "scrs",
+                    "scsf"
+                ]
+            },{
+                Name: "Hughes",
+                Count: 14,
+                Tags: []
+            },{
+                Name: "Special Collections",
+                Count: 0,
+                Tags: [
+                    "spcfo",
+                    "spe18",
+                    "spec",
+                    "speck",
+                    "speco",
+                    "specp",
+                    "specs",
+                    "specv",
+                    "spegr",
+                    "spemy",
+                    "spevf",
+                    "spkfo",
+                    "spmss"
+                ]
+            }];
+            var found = false;
+
+            while(length--){
+                found = false;
+                for(var i = 0; i < graph_data.length; i++){
+                    for(var k = 0; k < graph_data[i].Tags.length; k++)
+                        if(data[length].LocationID == graph_data[i].Tags[k]){
+                            //Increment the count
+                            graph_data[i].Count = graph_data[i].Count + parseInt(data[length].CheckoutNumbers);
+                            found = true;
+                            //console.log("Repeat Location: " + data[length].LocationID);
+                        }
+                }
+                if(!found){
+                    //graph_data[graph_data.length] = {Location: data[length].LocationID, Count: parseInt(data[length].CheckoutNumbers)};
+                    //console.log("Unknown: " + data[length].LocationID);
+                }
+            }
+
+
+
+            var series = [];
+            for(var j = 0; j < graph_data.length; j++){
+                //console.log(graph_data[j].Name + " : " + graph_data[j].Count);
+                series.push({
+                    name: graph_data[j].Name,
+                    data: [graph_data[j].Count]
+                });
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Equipment Use By Location'
+                },
+                subtitle: {
+                    text: 'Source: DailyCircDataDump'
+                },
+                xAxis: {
+                    categories: ['Locations'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 45000,
+                    title: {
+                        text: 'Checkouts',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Checkouts'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: series
+            });
+
+
         });
 
     });
