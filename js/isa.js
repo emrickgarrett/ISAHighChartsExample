@@ -1375,73 +1375,7 @@
             }
 
             $("#graph_space").html(result);
-
-
-/*
-
-            while(fund_length--){
-                console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].CostPerUse);
-                names.push(fundCodes_array[fund_length].Fund_Code);
-                series.push({
-                    name: fundCodes_array[fund_length].Fund_Code,
-                    data: [fundCodes_array[fund_length].CostPerUse]
-                });
-            }
-            $('#graph_space').highcharts({
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'Cost Per Use by Fund Code'
-                },
-                subtitle: {
-                    text: 'Source: db_usage 2012,2013,2014'
-                },
-                xAxis: {
-                    categories: ['Fund Code Statistics'],
-                    title: {
-                        text: null
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    max: 8000,
-                    title: {
-                        text: 'Cost per Use',
-                        align: 'high'
-                    },
-                    labels: {
-                        overflow: 'justify'
-                    }
-                },
-                tooltip: {
-                    valueSuffix: ' $/use'
-                },
-                plotOptions: {
-                    bar: {
-                        dataLabels: {
-                            enabled: true
-                        }
-                    }
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'top',
-                    x: -40,
-                    y: 80,
-                    floating: true,
-                    borderWidth: 1,
-                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                    shadow: true
-                },
-                credits: {
-                    enabled: false
-                },
-                series: series
-            });
-
-*/
+            
         });
 
         $("#equipment_by_location").click(function(){
