@@ -20,8 +20,6 @@ body{
 
 #content{
     background: white;
-    min-height:600px;
-    width:100%;
     text-align:center;
     margin-left:auto;
     margin-right:auto;
@@ -30,13 +28,11 @@ body{
 
 #sidebar{
     float:left;
-    min-height:450px
 
 }
 
 #sidebar-items{
     float:left;
-    min-height:450px;
     background: #E22;
 }
 
@@ -54,7 +50,6 @@ body{
 
 #sidebar_info{
     float:left;
-    min-height:450px;
     background:#B22;
     text-align:left;
     position:absolute;
@@ -80,10 +75,14 @@ body{
 
 #graph_space{
     float:left;
-    min-height:600px;
     width:75%;
     text-align:center;
     min-width: 310px;
     margin: 0 auto;
+    z-index:0;
+}
+
+#descrip_space{
+    float:left;
     z-index:0;
 }

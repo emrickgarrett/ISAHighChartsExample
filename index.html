@@ -2,6 +2,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <link rel="icon"
+          type="image/png"
+          href="http://www.units.miamioh.edu/uit/sites/edu.uit/files/itservices_favicon.png">
     <title>Library Analytics Dashboard</title>
 
     <!-- JQuery library -->
@@ -23,8 +26,9 @@
     <script type="text/javascript" src="JSON/ejournal/databaseusage2012.js"></script>
     <script type="text/javascript" src="JSON/ejournal/2012.js"></script>
     <script type="text/javascript" src="JSON/ejournal/2014.js"></script>
-    <script type="text/javascript" src="JSON/Instruction.js"></script>
     <script type="text/javascript" src="JSON/circulation/ShortTermLoans.js"></script>
+    <script type="text/javascript" src="JSON/instruction/getInstructionData.js"></script>
+    <script type="text/javascript" src="JSON/instruction/getOldInstructionData.js"></script>
 
     <!-- Custom CSS/JS files for demonstration -->
     <script type="text/javascript" src="js/isa.js"></script>
@@ -75,19 +79,19 @@
             <div id="ejournal-info">
                 <h2>Ejournal</h2>
                 <a href="#" id="database_by_usage">
-                    Cost of Fundcodes
+                    Cost of Ejournal
                 </a>
                 <a href="#" id="total_fundcode_cost">
-                    Total Cost of Fundcodes by Year
+                    Total Cost of Ejournal by Year
                 </a>
                 <a href="#" id="total_fundcode_use">
-                    Uses of Fundcodes
+                    Uses of Ejournal
                 </a>
                 <a href="#" id="total_fundcode_use_per_year">
-                    Total Use of Fundcodes by Year
+                    Total Use of Ejournal by Year
                 </a>
                 <a href="#" id="cost_per_use">
-                    Cost Per Use of Fundcodes
+                    Cost Per Use of Ejournal
                 </a>
                 <a href="#" id="cost_per_use_by_year">
                     Cost Per Use by Year
@@ -98,11 +102,50 @@
             </div>
             <div id="instruction-info">
                 <h2>Instruction</h2>
+                <a href="#" id="instructionNew">
+                    Classes taught in Libraries 2015
+                </a>
+                <a href="#" id="instructionOld">
+                    Classes taught in Libraries 2009-2013
+                </a>
             </div>
         </div>
     </div>
     <div id="graph_space">
         Click on a Graph on the Left to view it here
+    </div>
+    <div id="descrip_space">
+        <div id="equipment_by_location_descrip">
+            This is a basic description of the equipment by location
+        </div>
+        <div id="database_by_usage_descrip">
+            This is a basic description of the database by usage
+        </div>
+        <div id="total_fundcode_cost_descrip">
+            This is a basic description of the equipment by location
+        </div>
+        <div id="total_fundcode_use_descrip">
+            This is a basic description of the equipment by location
+        </div>
+        <div id="total_fundcode_use_per_year_descrip">
+            This is a basic description of the equipment by location
+        </div>
+        <div id="cost_per_use_descrip">
+            This is a basic description of the equipment by location
+        </div>
+        <div id="cost_per_use_by_year_descrip">
+        This is a basic description of the equipment by location
+        </div>
+        <div id="highest_cost_per_use_descrip">
+            This is a basic description of the equipment by location
+        </div>
+        <div id="instructionNew_descrip">
+            Jan 2015 - March 2015
+        </div>
+        <div id="instructionOld_descrip">
+            2009 - 2013
+        </div>
+
     </div>
 </div>
 

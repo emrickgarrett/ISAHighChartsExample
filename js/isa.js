@@ -411,6 +411,7 @@
         });
 
         $("#gate_count").click(function(){
+            hideDescriptions();
             //ID, Location, Date (yyyy-mm-dd hh:mm:ss), Count
             var json = getGateCount();
 
@@ -512,6 +513,9 @@
         });
 
         $("#database_by_usage").click(function() {
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
 
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
@@ -664,6 +668,9 @@
         });
 
         $("#total_fundcode_cost").click(function() {
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
 
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
@@ -762,6 +769,9 @@
 
         $("#total_fundcode_use").click(function() {
 
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
             var db_usage_2012_json = getDatabase2012();
@@ -914,6 +924,9 @@
 
         $("#total_fundcode_use_per_year").click(function() {
 
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
             var db_usage_2012_json = getDatabase2012();
@@ -1011,6 +1024,9 @@
 
         $("#cost_per_use").click(function() {
 
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
             var db_usage_2012_json = getDatabase2012();
@@ -1163,6 +1179,9 @@
 
         $("#cost_per_use_by_year").click(function() {
 
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
             var db_usage_2012_json = getDatabase2012();
@@ -1263,6 +1282,9 @@
 
         $("#highest_cost_per_use").click(function() {
 
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
             //Title, Publisher, ISSN, Fund Code, Total Costs, Uses, Cost Per Use
 
             var db_usage_2012_json = getDatabase2012();
@@ -1375,10 +1397,14 @@
             }
 
             $("#graph_space").html(result);
-            
+
         });
 
         $("#equipment_by_location").click(function(){
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+
             var data = getCircDataDump();
 
             var length = data.length;
@@ -1635,6 +1661,159 @@
 
         });
 
+        $("#instructionNew").click(function(){
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "In Library",
+                    Count: 0
+                },{
+                    Name: "Not In Library",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD8.toUpperCase().indexOf("OTHER") == -1){
+                    categories[0].Count = categories[0].Count + 1;
+                }else{
+                    categories[1].Count = categories[1].Count + 1;
+                }
+
+            }
+
+            /*
+             var cat_length = categories.length;
+             while(cat_length--){
+             alert(categories[cat_length].Location + " " + categories[cat_length].Count_Data);
+             }
+             */
+
+            //Do something with this data...
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Classes Taught In Libraries (Jan-Mar 2015)',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Location Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Location']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "In Library",
+                    data: [categories[0].Count]
+                }, {
+                    name: "Not In Library",
+                    data: [categories[1].Count]
+                }]
+            });
+        });
+
+        $("#instructionOld").click(function(){
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getOldInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "In Library",
+                    Count: 0
+                },{
+                    Name: "Not In Library",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD6.toUpperCase().indexOf("KING") == 0 || json[i].FIELD6.toUpperCase().indexOf("B.E.S.T.") == 0 || json[i].FIELD6.toUpperCase().indexOf("LIBRARY") == 0) {
+                    categories[0].Count = categories[0].Count + 1;
+                }else{
+                    categories[1].Count = categories[1].Count + 1;
+                }
+
+            }
+
+            /*
+             var cat_length = categories.length;
+             while(cat_length--){
+             alert(categories[cat_length].Location + " " + categories[cat_length].Count_Data);
+             }
+             */
+
+            //Do something with this data...
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Classes Taught In Libraries (2009-2013)',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Location Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Location']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "In Library",
+                    data: [categories[0].Count]
+                }, {
+                    name: "Not In Library",
+                    data: [categories[1].Count]
+                }]
+            });
+        });
     });
 
 
@@ -1647,4 +1826,21 @@
 
     function printInstructions(){
          console.log(getInstructionData()[1].FIELD8);
+    }
+
+    function hideDescriptions(){
+        //Hide all of the descriptions in the descrip_space
+        var divs = $("#descrip_space").children();
+
+        var length = divs.length;
+
+        while(length--){
+            divs[length].style.display = "none";
+        }
+    }
+
+    function showDescription(id){
+        id = "#" + id + "_descrip";
+
+        $(id).show();
     }
