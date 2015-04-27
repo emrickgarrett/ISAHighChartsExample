@@ -533,8 +533,14 @@
             var j = 0;
 
             for(i = 0; i < db_usage_2012_json.length; i++){
-                //console.log(db_usage_2012_json[i][3]);
+                db_usage_2012_json[i][3] = getSecondarySubject(db_usage_2012_json[i][3]);
             }
+			for(i = 0; i < db_usage_2013_json.length; i++){
+				db_usage_2013_json[i][4] = getSecondarySubject(db_usage_2013_json[i][4]);
+			}
+			for(i = 0; i < db_usage_2014_json.length; i++){
+				db_usage_2014_json[i][4] = getSecondarySubject(db_usage_2014_json[i][4]);
+			}
 
 
             //Do parsing for each individual db since 2012
@@ -786,10 +792,15 @@
             var index = -1;
             var i = 0;
             var j = 0;
-
-            for(i = 1; i < db_usage_2012_json.length; i++){
-                //console.log(db_usage_2012_json[i][3]);
+			for(i = 0; i < db_usage_2012_json.length; i++){
+                db_usage_2012_json[i][3] = getSecondarySubject(db_usage_2012_json[i][3]);
             }
+			for(i = 0; i < db_usage_2013_json.length; i++){
+				db_usage_2013_json[i][4] = getSecondarySubject(db_usage_2013_json[i][4]);
+			}
+			for(i = 0; i < db_usage_2014_json.length; i++){
+				db_usage_2014_json[i][4] = getSecondarySubject(db_usage_2014_json[i][4]);
+			}
 
 
             //Do parsing for each individual db since 2012
@@ -1042,9 +1053,15 @@
             var i = 0;
             var j = 0;
 
-            for(i = 1; i < db_usage_2012_json.length; i++){
-                //console.log(db_usage_2012_json[i][3]);
+            for(i = 0; i < db_usage_2012_json.length; i++){
+                db_usage_2012_json[i][3] = getSecondarySubject(db_usage_2012_json[i][3]);
             }
+			for(i = 0; i < db_usage_2013_json.length; i++){
+				db_usage_2013_json[i][4] = getSecondarySubject(db_usage_2013_json[i][4]);
+			}
+			for(i = 0; i < db_usage_2014_json.length; i++){
+				db_usage_2014_json[i][4] = getSecondarySubject(db_usage_2014_json[i][4]);
+			}
 
 
             //Do parsing for each individual db since 2012
@@ -1301,8 +1318,14 @@
             var j = 0;
 
             for(i = 0; i < db_usage_2012_json.length; i++){
-                //console.log(db_usage_2012_json[i][3]);
+                db_usage_2012_json[i][3] = getSecondarySubject(db_usage_2012_json[i][3]);
             }
+			for(i = 0; i < db_usage_2013_json.length; i++){
+				db_usage_2013_json[i][4] = getSecondarySubject(db_usage_2013_json[i][4]);
+			}
+			for(i = 0; i < db_usage_2014_json.length; i++){
+				db_usage_2014_json[i][4] = getSecondarySubject(db_usage_2014_json[i][4]);
+			}
 
 
             //Do parsing for each individual db since 2012
@@ -1844,3 +1867,29 @@
 
         $(id).show();
     }
+	
+	function getPrimarySubject(fund_code){
+		
+		var result = getSubUsage();
+		
+		var length = result.length;
+		
+		while(length--){
+			if(result[length].Code == fund_code){
+				return result[length].Primary_Subject;
+			}
+		}
+		
+	}
+	
+	function getSecondarySubject(fund_code){
+		var result = getSubUsage();
+		
+		var length = result.length;
+		
+		while(length--){
+			if(result[length].Code == fund_code){
+				return result[length].Secondary_Subject;
+			}
+		}
+	}
