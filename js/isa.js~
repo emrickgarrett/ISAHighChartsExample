@@ -1941,7 +1941,10 @@ $("#total_fundcode_use_pie").click(function() {
             while(fund_length--){
                 console.log(fundCodes_array[fund_length].Fund_Code + " : " + fundCodes_array[fund_length].Uses);
                 names.push(fundCodes_array[fund_length].Fund_Code);
-                series[series.length] = [fundCodes_array[fund_length].Fund_Code,fundCodes_array[fund_length].Uses/total]
+                series.push(
+                    fundCodes_array[fund_length].Fund_Code,
+                    [fundCodes_array[fund_length].Uses/total]
+                );
             }
             
 	$('#graph_space').highcharts({
