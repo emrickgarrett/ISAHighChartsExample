@@ -70,7 +70,7 @@ function getDatabase2014(){return [
 ["Environmental History", "OXFORD UNIVERSITY PRESS", "1084-5453", "1930-8892", "61IES","$202.00 ", "0", "$0.00 "],
 ["Journal of Soil and Water Conservation", "SOIL & WATER CONSERVATION SOC", "0022-4561", "1941-3300", "61IES","$530.00 ", "86", "$6.16 "],
 ["Wildlife Society Bulletin", "JOHN WILEY & SONS", "0091-7648", "1938-5463", "61IES","$416.00 ", "29", "$14.34 "],
-["Global Biogeochemical Cycles", "AMERICAN GEOPHYSICAL UNION", "0886-6236", "1944-9224", "61LGL","$275.00 ", "84", "$3.27 "],
+["Global Biogeochemical Cycles", "AMERICAN GEOPHYSICAL UNION", "0886-6236", "1944-9224", "61GLG","$275.00 ", "84", "$3.27 "],
 ["American Biology Teacher", "UNIVERSITY OF CALIFORNIA PRESS", "0002-7685", "1938-4211", "61LIF","$193.00 ", "0", "$0.00 "],
 ["Biochemistry & Cell Biology", "NRC RESEARCH PRESS", "0829-8211", "1208-6002", "61LIF","$810.00 ", "12", "$67.50 "],
 ["Bioscience", "OXFORD UNIVERSITY PRESS", "0006-3568", "1525-3244", "61LIF","$538.00 ", "0", "$0.00 "],

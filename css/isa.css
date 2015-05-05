@@ -1,6 +1,8 @@
 body{
     margin:0;
     padding:0;
+    height:1075px;
+    max-height:1075px;
 }
 
 #navbar{
@@ -24,6 +26,7 @@ body{
     margin-left:auto;
     margin-right:auto;
     border: 1px solid black;
+    max-height:1000px;
 }
 
 #sidebar{
@@ -79,10 +82,30 @@ body{
     text-align:center;
     min-width: 310px;
     margin: 0 auto;
+    max-height:1000px;
     z-index:0;
 }
 
 #descrip_space{
     float:left;
     z-index:0;
+}
+
+#top_ten{
+    margin-left:auto;
+    margin-right:auto;
+    color:#B22;
+    font-family: 'Myriad Pro', Helvetica, sans-serif;
+    font-size:2em;
+}
+
+#top_ten th{
+    background:#b22;
+    color:white;
+    text-align:center;
+}
+
+#top_ten tr:hover{
+    color:white;
+    background:#b22;
 }

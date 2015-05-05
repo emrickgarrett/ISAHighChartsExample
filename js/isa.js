@@ -1413,12 +1413,13 @@
                 }
             }
 
-            var result = "<h3>Top 10 Cost Per Use Fund Codes</h3>";
+            var result = "<div><table id='top_ten'><tr><th>Rank</th><th>Fund Code</th><th>Cost Per Use</th><th>Uses</th></tr>";
 
             for(i = 0; i < 10; i++){
-                result = result + "Fund Code: " + top10[i].Fund_Code + " With Cost Per Use of : " + top10[i].CostPerUse + " With " + top10[i].Uses + " Uses.<br/>";
+                result = result + "<tr><td>" + (i+1) + "</td><td style='text-align:left;'>" + top10[i].Fund_Code + "</td><td>" + top10[i].CostPerUse + "</td><td>" + top10[i].Uses + "</td></tr>";
             }
 
+            result += "</table></div>";
             $("#graph_space").html(result);
 
         });
@@ -1979,7 +1980,2950 @@ $("#total_fundcode_use_pie").click(function() {
 
         });
 
-    
+        /** All of Johnny's Stuff */
+        $("#Divisional").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "FSB",
+                    Count: 0
+                },{
+                    Name: "CAS",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD6.toUpperCase().indexOf("FSB") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD6.toUpperCase().indexOf("CAS") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+            }
+
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Division Taught Courses',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Division Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Division']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "FSB",
+                    data: [categories[0].Count]
+                }, {
+                    name: "CAS",
+                    data: [categories[1].Count]
+                }]
+            });
+        });
+
+
+        $("#DefineLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "D1",
+                    Count: 0
+                },{
+                    Name: "D2",
+                    Count: 0
+                },{
+                    Name: "D3",
+                    Count: 0
+                },{
+                    Name: "D4",
+                    Count: 0
+                },{
+                    Name: "D5",
+                    Count: 0
+                },{
+                    Name: "D6",
+                    Count: 0
+                },{
+                    Name: "D7",
+                    Count: 0
+                },{
+                    Name: "D8",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("D1") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D2") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D3") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D4") > -1) {
+                    categories[3].Count = categories[3].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D5") > -1) {
+                    categories[4].Count = categories[4].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D6") > -1) {
+                    categories[5].Count = categories[5].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D7") > -1) {
+                    categories[6].Count = categories[6].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D8") > -1) {
+                    categories[7].Count = categories[7].Count + 1;
+                }
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Define Learning Objectives Classes',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Learning Objective']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "D1",
+                    data: [categories[0].Count]
+                }, {
+                    name: "D2",
+                    data: [categories[1].Count]
+                },{
+                    name: "D3",
+                    data: [categories[2].Count]
+                },{
+                    name: "D4",
+                    data: [categories[3].Count]
+                },{
+                    name: "D5",
+                    data: [categories[4].Count]
+                },{
+                    name: "D6",
+                    data: [categories[5].Count]
+                },{
+                    name: "D7",
+                    data: [categories[6].Count]
+                },{
+                    name: "D8",
+                    data: [categories[7].Count]
+                }]
+            });
+        });
+
+
+        $("#SearchLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "S1",
+                    Count: 0
+                },{
+                    Name: "S2",
+                    Count: 0
+                },{
+                    Name: "S3",
+                    Count: 0
+                },{
+                    Name: "S4",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("S1") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("S2") > -1 ) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("S3") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("S4") > -1) {
+                    categories[3].Count = categories[3].Count + 1;
+                }
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Search Learning Objectives',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Search Objectives']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "S1",
+                    data: [categories[0].Count]
+                }, {
+                    name: "S2",
+                    data: [categories[1].Count]
+                },{
+                    name: "S3",
+                    data: [categories[2].Count]
+                },{
+                    name: "S4",
+                    data: [categories[3].Count]
+                }]
+            });
+        });
+
+
+        $("#AnalyzeLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "A1",
+                    Count: 0
+                },{
+                    Name: "A2",
+                    Count: 0
+                },{
+                    Name: "A3",
+                    Count: 0
+                },{
+                    Name: "A4",
+                    Count: 0
+                },{
+                    Name: "A5",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("A1") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("A2") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("A3") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("A4") > -1) {
+                    categories[3].Count = categories[3].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("A5") > -1) {
+                    categories[4].Count = categories[4].Count + 1;
+                }
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Analysis Learning Objectives',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Analysis Objectives']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "A1",
+                    data: [categories[0].Count]
+                }, {
+                    name: "A2",
+                    data: [categories[1].Count]
+                },{
+                    name: "A3",
+                    data: [categories[2].Count]
+                },{
+                    name: "A4",
+                    data: [categories[3].Count]
+                },{
+                    name: "A5",
+                    data: [categories[4].Count]
+                }]
+            });
+        });
+
+        $("#SynthesisLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "Y1",
+                    Count: 0
+                },{
+                    Name: "Y2",
+                    Count: 0
+                },{
+                    Name: "Y3",
+                    Count: 0
+                },{
+                    Name: "Y4",
+                    Count: 0
+                },{
+                    Name: "Y5",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("Y1") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("Y2") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("Y3") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("Y4") > -1) {
+                    categories[3].Count = categories[3].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("Y5") > -1) {
+                    categories[4].Count = categories[4].Count + 1;
+                }
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Synthesis Learning Objectives',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Synthesis Objectives']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "Y1",
+                    data: [categories[0].Count]
+                }, {
+                    name: "Y2",
+                    data: [categories[1].Count]
+                },{
+                    name: "Y3",
+                    data: [categories[2].Count]
+                },{
+                    name: "Y4",
+                    data: [categories[3].Count]
+                },{
+                    name: "Y5",
+                    data: [categories[4].Count]
+                }]
+            });
+        });
+
+
+        $("#CreationLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "C1",
+                    Count: 0
+                },{
+                    Name: "C2",
+                    Count: 0
+                },{
+                    Name: "C3",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("C1") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("C2") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("C3") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Creation Learning Objectives',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Creation Objectives']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "C1",
+                    data: [categories[0].Count]
+                }, {
+                    name: "C2",
+                    data: [categories[1].Count]
+                }, {
+                    name: "C3",
+                    data: [categories[2].Count]
+                }]
+            });
+        });
+
+        $("#EthicsLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "E1",
+                    Count: 0
+                },{
+                    Name: "E2",
+                    Count: 0
+                },{
+                    Name: "E3",
+                    Count: 0
+                },{
+                    Name: "E4",
+                    Count: 0
+                },{
+                    Name: "E5",
+                    Count: 0
+                }];
+
+            //How long the data set is (50,000 for this set)
+            //alert(json_length);
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("E1") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("E2") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("E3") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("E4") > -1) {
+                    categories[3].Count = categories[3].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("E5") > -1) {
+                    categories[4].Count = categories[4].Count + 1;
+                }
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Ethics Learning Objectives',
+                    x: -20
+                },
+                subtitle: {
+                    text: 'Class Count',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Ethics Objectives']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Class Count',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: "E1",
+                    data: [categories[0].Count]
+                }, {
+                    name: "E2",
+                    data: [categories[1].Count]
+                },{
+                    name: "E3",
+                    data: [categories[2].Count]
+                },{
+                    name: "E4",
+                    data: [categories[3].Count]
+                },{
+                    name: "E5",
+                    data: [categories[4].Count]
+                }]
+            });
+        });
+
+        $("#PieLO").click(function(){
+            hideDescriptions();
+            showDescription(this.id);
+            //ID, Location, Date (yyyy-mm-dd hh-mm-ss), Count
+            var json = getInstructionData();
+            var json_length = json.length;
+            var categories = [
+                {
+                    Name: "A",
+                    Count: 0
+                },{
+                    Name: "S",
+                    Count: 0
+                },{
+                    Name: "Y",
+                    Count: 0
+                },{
+                    Name: "D",
+                    Count: 0
+                },{
+                    Name: "C",
+                    Count: 0
+                },{
+                    Name: "E",
+                    Count: 0
+                }];
+
+            for(var i = json_length - 1; i > 0; i--){
+                if(json[i].FIELD10.toUpperCase().indexOf("A") > -1) {
+                    categories[0].Count = categories[0].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("S") > -1) {
+                    categories[1].Count = categories[1].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("Y") > -1) {
+                    categories[2].Count = categories[2].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("D") > -1) {
+                    categories[3].Count = categories[3].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("C") > -1) {
+                    categories[4].Count = categories[4].Count + 1;
+                }
+                if (json[i].FIELD10.toUpperCase().indexOf("E") > -1) {
+                    categories[5].Count = categories[5].Count + 1;
+                }
+            }
+
+            var series = [];
+            var names  = [];
+            var total = 0.0;
+            var cl = categories.length;
+            for(var i = 0; i < categories.length; i++){
+                total += categories[i].Count;
+                console.log(categories[i].Count);
+            }
+
+            while(cl--){
+                console.log(categories[cl].FIELD10 + " : " + categories[cl].Count);
+                names.push(categories[cl].FIELD10);
+                series[series.length] = [categories[cl].Name,categories[cl].Count/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Instruction Learning Objectives'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Learning Objectives',
+                    data: series
+                }]
+            });
+        });
+
+
+        /** Circulation stuff. Mostly just Pie Charts of where all the stuff is **/
+        $("#power_cords").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[1].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[1].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[1].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[1].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[1].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[1].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[1].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Power Cord Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Power Cord Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#headphones").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[2].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[2].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[2].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[2].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[2].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[2].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[2].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Headphone Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Headphone Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#power_cords_pc").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[3].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[3].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[3].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[3].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[3].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[3].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[3].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Power Cord (PC) Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Power Cord (PC) Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#laptop_mac").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[4].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[4].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[4].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[4].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[4].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[4].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[4].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Laptop (Mac) Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Laptop (Mac) Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#laptop_pc").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[5].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[5].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[5].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[5].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[5].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[5].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[5].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Laptop (PC) Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Laptop (PC) Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#ipad_tablet").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[6].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[6].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[6].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[6].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[6].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[6].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[6].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'iPad/Tablet Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'iPad/Tablet Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#camera").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[7].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[7].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[7].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[7].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[7].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[7].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[7].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Camera Accessory Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Camera Accessory Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#digital_camera").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[8].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[8].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[8].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[8].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[8].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[8].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[8].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Digital Video Camera Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Digital Video Camera Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#calculator").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[9].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[9].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[9].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[9].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[9].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[9].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[9].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Graphing/Digital Calculator Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Graphing/Digital Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#network_cables").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[10].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[10].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[10].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[10].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[10].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[10].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[10].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Network Cables Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Network Cable Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#misc").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[11].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[11].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[11].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[11].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[11].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[11].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[11].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Misc Equipment Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Misc Equipment Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+        $("#projectors").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[12].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[12].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[12].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[12].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[12].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[12].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[12].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Projectors Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Projectors Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#digital_voice").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[13].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[13].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[13].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[13].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[13].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[13].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[13].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Digital Voice Recorders Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Digital Voice Recorders Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#digital_still").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[14].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[14].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[14].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[14].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[14].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[14].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[14].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Digital StilL Camera Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Digital Still Camera Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#microphones").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[15].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[15].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[15].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[15].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[15].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[15].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[15].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Microphones Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Microphones Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#asg").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[16].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[16].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[16].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[16].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[16].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[16].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[16].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'ASG Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'ASG Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#translators").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[17].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[17].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[17].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[17].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[17].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[17].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[17].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Translators Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Translators Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#projector_screen").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[18].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[18].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[18].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[18].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[18].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[18].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[18].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Projector Screen Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Projector Screen Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#remote_control").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[19].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[19].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[19].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[19].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[19].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[19].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[19].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Remote Control Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Remote Control Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#mouse").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[20].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[20].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[20].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[20].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[20].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[20].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[20].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Mouse Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Mouse Cord Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#lectern").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[21].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[21].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[21].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[21].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[21].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[21].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[21].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Portable Lectern Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Portable Lectern Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#dvd_player").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[22].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[22].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[22].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[22].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[22].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[22].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[22].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'DVD Player Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'DVD Player Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
+        $("#total_digital").click(function() {
+
+            //Show the description
+            hideDescriptions();
+            showDescription(this.id);
+            //1:blank, 2:Art/Arch, 3:B.E.S.T, 4:Hamilton, 5:King, 6:IMC, 7:Middletown,8:Music
+
+            var data = getShortTermLoans();
+
+            var result = [
+                {
+                    Name: "Art/Arch",
+                    Data: parseInt(data[23].FIELD2)
+                },
+                {
+                    Name: "B.E.S.T",
+                    Data: parseInt(data[23].FIELD3)
+                },
+                {
+                    Name: "Hamilton",
+                    Data: parseInt(data[23].FIELD4)
+                },
+                {
+                    Name: "King",
+                    Data: parseInt(data[23].FIELD5)
+                },
+                {
+                    Name: "IMC",
+                    Data: parseInt(data[23].FIELD6)
+                },
+                {
+                    Name: "Middletown",
+                    Data: parseInt(data[23].FIELD7)
+                },
+                {
+                    Name: "Music",
+                    Data: parseInt(data[23].FIELD8)
+                }
+            ];
+
+            var names = [];
+            var series = [];
+            var total = 0.0;
+
+            for(var i = 0; i < result.length; i++){
+                if(isNaN(result[i].Data)){
+                    result[i].Data = 0;
+                }
+                total += result[i].Data;
+                console.log(result[i].Data);
+
+            }
+
+            var result_length = result.length;
+
+            while(result_length--){
+                console.log(result[result_length].Name + " : " + result[result_length].Data);
+                names.push(result[result_length].Name);
+                series[series.length] = [result[result_length].Name,result[result_length].Data/total]
+            }
+
+            $('#graph_space').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Total Digital Equipment Usage by Building'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Total Digital Equipment Usage',
+                    data: series
+                }]
+            });
+
+
+        });
+
 		
 	});
 
